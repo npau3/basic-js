@@ -23,7 +23,43 @@ import { NotImplementedError } from '../extensions/index.js';
  *  [1, 1, 1]
  * ]
  */
-export default function minesweeper (/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+ export default function minesweeper (matrix) {
+  const result = [];
+  let mines = 0;
+  for (let i = 0; i < matrix.length; i += 1) {
+    result[i] = [];
+    for (let j = 0; j < matrix[i].length; j += 1) {
+      if (matrix[i][j] === true) {
+        mines += 1;
+      } else {
+        if (matrix[i - 1] && matrix[i - 1][j - 1] && matrix[i - 1][j - 1] === true) {
+          mines += 1;
+        }
+        if (matrix[i - 1] && matrix[i - 1][j] === true) {
+          mines += 1;
+        }
+        if (matrix[i - 1] && matrix[i - 1][j + 1] && matrix[i - 1][j + 1] === true) {
+          mines += 1;
+        }
+        if (matrix[i][j - 1] && matrix[i][j - 1] === true) {
+          mines += 1;
+        }
+        if (matrix[i][j + 1] && matrix[i][j + 1] === true) {
+          mines += 1;
+        }
+        if (matrix[i + 1] && matrix[i + 1][j - 1] && matrix[i + 1][j - 1] === true) {
+          mines += 1;
+        }
+        if (matrix[i + 1] && matrix[i + 1][j] && matrix[i + 1][j] === true) {
+          mines += 1;
+        }
+        if (matrix[i + 1] && matrix[i + 1][j + 1] && matrix[i + 1][j + 1] === true) {
+          mines += 1;
+        }
+      }
+      result[i].push(mines);
+      mines = 0;
+    }
+  }
+  return result;
 }
